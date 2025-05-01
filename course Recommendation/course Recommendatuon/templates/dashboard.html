@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        .dashboard-container {
+            max-width: 900px;
+            margin: 30px auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .dashboard-header {
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+        h2 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .profile-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .user-details {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .user-details ul {
+            list-style: none;
+        }
+        .user-details li {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .user-details li:last-child {
+            border-bottom: none;
+        }
+        .user-details strong {
+            color: #2c3e50;
+            min-width: 100px;
+            display: inline-block;
+        }
+        .logout-btn {
+            display: inline-block;
+            background: #e74c3c;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            margin: 30px auto;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(231, 76, 60, 0.2);
+        }
+        .logout-btn:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(231, 76, 60, 0.3);
+        }
+        .detail-icon {
+            color: #3498db;
+            font-size: 18px;
+            width: 25px;
+            text-align: center;
+        }
+        .edit-profile {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .edit-profile:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <h2><i class="fas fa-user-circle"></i> User Dashboard</h2>
+            
+        </div>
+
+        <div class="profile-section">
+            <img src="{{ url_for('static', filename='uploads/' + user.profile_img) }}" 
+                 alt="Profile Image" 
+                 class="profile-img"
+                 onerror="this.src='https://www.gravatar.com/avatar/default?s=150&d=mp'">
+        </div>
+
+        <div class="user-details">
+            <ul>
+                <li>
+                    <span class="detail-icon"><i class="fas fa-user"></i></span>
+                    <strong>Name:</strong> {{ user.name }}
+                </li>
+                <li>
+                    <span class="detail-icon"><i class="fas fa-envelope"></i></span>
+                    <strong>Email:</strong> {{ user.email }}
+                </li>
+                <li>
+                    <span class="detail-icon"><i class="fas fa-mobile-alt"></i></span>
+                    <strong>Mobile:</strong> {{ user.mobile }}
+                </li>
+                <li>
+                    <span class="detail-icon"><i class="fas fa-birthday-cake"></i></span>
+                    <strong>Age:</strong> {{ user.age }}
+                </li>
+                <li>
+                    <span class="detail-icon"><i class="fas fa-map-marker-alt"></i></span>
+                    <strong>Location:</strong> {{ user.location }}
+                </li>
+            </ul>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="{{ url_for('logout') }}" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+        </div>
+    </div>
+</body>
+</html>
